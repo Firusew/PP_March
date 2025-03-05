@@ -1,0 +1,33 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="PPMarch.EditWindows.EditSuppliersWindow"
+        Width="450"
+        Height="360"
+        WindowStartupLocation="CenterScreen"
+        Title="Редактировать запись о поставщике">
+        <StackPanel Margin="10">
+
+                <TextBlock Text="Наименование:"/>
+                <TextBox x:Name="NameTextBox" Margin="5" x:CompileBindings="False" Text="{Binding Name}"/>
+            
+                <TextBlock Text="Адрес:"/>
+                <TextBox x:Name="AddressTextBox" Margin="5" x:CompileBindings="False" Text="{Binding Address}"/>
+            
+                <TextBlock Text="Контактное лицо:"/>
+                <TextBox x:Name="ContactpersonTextBox" Margin="5" x:CompileBindings="False" Text="{Binding Contactperson}"/>
+            
+                <TextBlock Text="Телефон:"/>
+                <TextBox x:Name="PhoneTextBox" Margin="5" x:CompileBindings="False" Text="{Binding Phone}"/>
+            
+                <TextBlock Text="Email:"/>
+                <TextBox x:Name="EmailTextBox" Margin="5" x:CompileBindings="False" Text="{Binding Email}"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                        <Button Content="Сохранить" Click="SaveButton_Click" Margin="5"/>
+                        <Button Content="Отмена" Click="CancelButton_Click" Margin="5"/>
+                </StackPanel>
+        </StackPanel>
+</Window>

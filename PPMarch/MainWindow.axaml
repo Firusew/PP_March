@@ -1,0 +1,107 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="PPMarch.MainWindow"
+        WindowStartupLocation="CenterScreen"
+        Title="PPMarch">
+        <Grid RowDefinitions="Auto,*,Auto,Auto">
+                <TabControl Grid.Row="0" Name="TableTabs">
+                        <TabItem Header="Поставщики">
+                                <DataGrid x:Name="DataGridSuppliers" x:CompileBindings="False" ColumnWidth="Auto" IsReadOnly="True">
+                                        <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Наименование" Binding="{Binding Name}"/>
+                                                <DataGridTextColumn Header="Адрес" Binding="{Binding Address}"/>
+                                                <DataGridTextColumn Header="Контактное лицо" Binding="{Binding Contactperson}"/>
+                                                <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}"/>
+                                                <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                                        </DataGrid.Columns>
+                                </DataGrid>
+                        </TabItem>
+                        <TabItem Header="Материалы">
+                                <DataGrid x:Name="DataGridMaterials" x:CompileBindings="False" ColumnWidth="Auto" IsReadOnly="True">
+                                        <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Наименование" Binding="{Binding Name}"/>
+                                                <DataGridTextColumn Header="Описание" Binding="{Binding Description}"/>
+                                                <DataGridTextColumn Header="Единица измерения" Binding="{Binding Unit}"/>
+                                                <DataGridTextColumn Header="Минимальный запас" Binding="{Binding Minstock}"/>
+                                        </DataGrid.Columns>
+                                </DataGrid>
+                        </TabItem>
+                        <TabItem Header="Закупки">
+                                <DataGrid x:Name="DataGridPurchases" x:CompileBindings="False" ColumnWidth="Auto" IsReadOnly="True">
+                                        <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Дата закупки" Binding="{Binding Purchasedate}"/>
+                                                <DataGridTextColumn Header="Поставщик" Binding="{Binding Supplier.Name}"/>
+                                                <DataGridTextColumn Header="Статус закупки" Binding="{Binding Status}"/>
+                                                <DataGridTextColumn Header="Общая сумма" Binding="{Binding Totalamount}"/>
+                                        </DataGrid.Columns>
+                                </DataGrid>
+                        </TabItem>
+                        <TabItem Header="Детали закупок">
+                                <DataGrid x:Name="DataGridPurchaseDetails" x:CompileBindings="False" ColumnWidth="Auto" IsReadOnly="True">
+                                        <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Дата закупки" Binding="{Binding Purchase.Purchasedate}"/>
+                                                <DataGridTextColumn Header="Материал" Binding="{Binding Material.Name}"/>
+                                                <DataGridTextColumn Header="Количество" Binding="{Binding Quantity}"/>
+                                                <DataGridTextColumn Header="Цена за единицу" Binding="{Binding Unitprice}"/>
+                                        </DataGrid.Columns>
+                                </DataGrid>
+                        </TabItem>
+                        <TabItem Header="Склады">
+                                <DataGrid x:Name="DataGridWarehouse" x:CompileBindings="False" ColumnWidth="Auto" IsReadOnly="True">
+                                        <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Название" Binding="{Binding Name}"/>
+                                                <DataGridTextColumn Header="Адрес" Binding="{Binding Address}"/>
+                                                <DataGridTextColumn Header="Вместимость" Binding="{Binding Capacity}"/>
+                                        </DataGrid.Columns>
+                                </DataGrid>
+                        </TabItem>
+                        <TabItem Header="Остатки на складах">
+                                <DataGrid x:Name="DataGridWarehouseStock" x:CompileBindings="False" ColumnWidth="Auto" IsReadOnly="True">
+                                        <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Название склада" Binding="{Binding Warehouse.Name}"/>
+                                                <DataGridTextColumn Header="Материал" Binding="{Binding Material.Name}"/>
+                                                <DataGridTextColumn Header="Количество" Binding="{Binding Quantity}"/>
+                                                <DataGridTextColumn Header="Последнее обновление" Binding="{Binding Lastupdated}"/>
+                                        </DataGrid.Columns>
+                                </DataGrid>
+                        </TabItem>
+                        <TabItem Header="Движение материалов">
+                                <DataGrid x:Name="DataGridMaterialMovement" x:CompileBindings="False" ColumnWidth="Auto" IsReadOnly="True">
+                                        <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Материал" Binding="{Binding Material.Name}"/>
+                                                <DataGridTextColumn Header="Название склада" Binding="{Binding Warehouse.Name}"/>
+                                                <DataGridTextColumn Header="Тип движения" Binding="{Binding Movementtype}"/>
+                                                <DataGridTextColumn Header="Количество" Binding="{Binding Quantity}"/>                                                <DataGridTextColumn Header="Общая сумма" Binding="{Binding Quantity}"/>
+                                                <DataGridTextColumn Header="Дата движения" Binding="{Binding Movementdate}"/>
+                                        </DataGrid.Columns>
+                                </DataGrid>
+                        </TabItem>
+                        <TabItem Header="Качество материалов">
+                                <DataGrid x:Name="DataGridMaterialQuality" x:CompileBindings="False" ColumnWidth="Auto" IsReadOnly="True">
+                                        <DataGrid.Columns>
+                                                <DataGridTextColumn Header="Материал" Binding="{Binding Material.Name}"/>
+                                                <DataGridTextColumn Header="Дата проверки" Binding="{Binding Checkdate}"/>
+                                                <DataGridTextColumn Header="Результат" Binding="{Binding Result}"/>
+                                                <DataGridTextColumn Header="Комментарий" Binding="{Binding Comment}"/>
+                                        </DataGrid.Columns>
+                                </DataGrid>
+                        </TabItem>
+                </TabControl>
+        
+                <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto,Auto">
+                        <TextBlock VerticalAlignment="Center" Text="Фильтр:" />
+                        <TextBox Grid.Column="1" Name="FilterTextBox" Margin="5" />
+                        <ComboBox Grid.Column="2" Name="ColumnComboBox" Margin="5" />
+                        <Button Grid.Column="3" Content="Очистить фильр" Click="ClearFilter_Click" Margin="5" />
+                </Grid>
+        
+                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="Добавить" Click="Add_Click" Margin="5" />
+                        <Button Content="Редактировать" Click="Edit_Click" Margin="5" />
+                        <Button Content="Удалить" Click="Delete_Click" Margin="5" />
+                </StackPanel>
+        </Grid>
+</Window>

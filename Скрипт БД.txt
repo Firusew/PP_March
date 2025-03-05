@@ -1,0 +1,72 @@
+-- Создание таблицы Поставщики (Suppliers)
+CREATE TABLE Suppliers (
+    SupplierID SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Address TEXT,
+    ContactPerson VARCHAR(100),
+    Phone VARCHAR(20),
+    Email VARCHAR(100)
+);
+
+-- Создание таблицы Материалы (Materials)
+CREATE TABLE Materials (
+    MaterialID SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Description TEXT,
+    Unit VARCHAR(20) NOT NULL,
+    MinStock DECIMAL(10, 2)
+);
+
+-- Создание таблицы Закупки (Purchases)
+CREATE TABLE Purchases (
+    PurchaseID SERIAL PRIMARY KEY,
+    PurchaseDate DATE NOT NULL,
+    SupplierID INTEGER REFERENCES Suppliers(SupplierID),
+    Status VARCHAR(20) NOT NULL,
+    TotalAmount DECIMAL(12, 2) NOT NULL
+);
+
+-- Создание таблицы Детали_закупки (PurchaseDetails)
+CREATE TABLE PurchaseDetails (
+    DetailID SERIAL PRIMARY KEY,
+    PurchaseID INTEGER REFERENCES Purchases(PurchaseID),
+    MaterialID INTEGER REFERENCES Materials(MaterialID),
+    Quantity DECIMAL(10, 2) NOT NULL,
+    UnitPrice DECIMAL(10, 2) NOT NULL
+);
+
+-- Создание таблицы Склад (Warehouse)
+CREATE TABLE Warehouse (
+    WarehouseID SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Address TEXT,
+    Capacity DECIMAL(10, 2)
+);
+
+-- Создание таблицы Остатки_на_складе (WarehouseStock)
+CREATE TABLE WarehouseStock (
+    StockID SERIAL PRIMARY KEY,
+    WarehouseID INTEGER REFERENCES Warehouse(WarehouseID),
+    MaterialID INTEGER REFERENCES Materials(MaterialID),
+    Quantity DECIMAL(10, 2) NOT NULL,
+    LastUpdated TIMESTAMP NOT NULL
+);
+
+-- Создание таблицы Движение_материалов (MaterialMovement)
+CREATE TABLE MaterialMovement (
+    MovementID SERIAL PRIMARY KEY,
+    MaterialID INTEGER REFERENCES Materials(MaterialID),
+    WarehouseID INTEGER REFERENCES Warehouse(WarehouseID),
+    MovementType VARCHAR(20) NOT NULL,
+    Quantity DECIMAL(10, 2) NOT NULL,
+    MovementDate TIMESTAMP NOT NULL
+);
+
+-- Создание таблицы Качество_материалов (MaterialQuality)
+CREATE TABLE MaterialQuality (
+    QualityCheckID SERIAL PRIMARY KEY,
+    MaterialID INTEGER REFERENCES Materials(MaterialID),
+    CheckDate DATE NOT NULL,
+    Result VARCHAR(20) NOT NULL,
+    Comment TEXT
+);

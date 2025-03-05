@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="PPMarch/AddWindows/AddMaterialsWindow.axaml" value="PPMarch/PPMarch.csproj" />
+        <entry key="PPMarch/AddWindows/AddPurchasesWindow.axaml" value="PPMarch/PPMarch.csproj" />
+        <entry key="PPMarch/AddWindows/AddSuppliersWindow.axaml" value="PPMarch/PPMarch.csproj" />
+        <entry key="PPMarch/App.axaml" value="PPMarch/PPMarch.csproj" />
+        <entry key="PPMarch/EditWindows/EditSuppliersWindow.axaml" value="PPMarch/PPMarch.csproj" />
+        <entry key="PPMarch/MainWindow.axaml" value="PPMarch/PPMarch.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
